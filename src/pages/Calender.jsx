@@ -33,6 +33,11 @@ const Calendar = () => {
       setSelectedMonth(selectedMonth + 1);
     }
   };
+  const goToToday = () => {
+    setSelectedMonth(todayMonth);
+    setSelectedYear(todayYear);
+    setView("month");
+  };
 
   const getMonthName = (month) => {
     const months = [
@@ -218,7 +223,7 @@ const Calendar = () => {
       </div>
     );
   };
-  const years = Array.from({ length: 20 }, (_, i) => selectedYear - 10 + i);
+  const years = Array.from({ length: 10 }, (_, i) => selectedYear - 5 + i);
   return (
     <div className="pb-20">
       <div className="flex gap-4 mb-4">
@@ -234,16 +239,22 @@ const Calendar = () => {
         >
           Month
         </button>
+        <button
+          onClick={goToToday}
+          className="bg-gray-400 mt-2 px-4 py-2 rounded  hover:bg-gray-500"
+        >
+          Today
+        </button>
       </div>
-      <div className="flex gap-4 mb-4 justify-left ml-4 ">
+      <div className="flex gap-4 mb-4 justify-left ml-8 ">
         <select
           id="year"
           value={selectedYear}
           onChange={(e) => setSelectedYear(Number(e.target.value))}
-          className=" relative px-4 py-2 rounded bg-gray-300 border-gray-300 hover-gray-300  "
+          className=" relative px-4 py-2 rounded bg-gray-300 border-gray-300 hover-gray-300 "
         >
           {years.map((year) => (
-            <option key={year} value={year} className="py-8 bg-gray-300">
+            <option key={year} value={year} className="py-8 px-8 bg-gray-300">
               {year}
             </option>
           ))}
