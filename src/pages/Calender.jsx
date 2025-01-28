@@ -83,11 +83,20 @@ const Calendar = () => {
     return days;
   };
 
-  const handleDateClick = (event, day) => {
+  const handleDateClick = (
+    event,
+    day,
+    monthIndex = selectedMonth,
+    year = selectedYear
+  ) => {
     event?.stopPropagation();
     event?.preventDefault();
     if (day) {
-      setPopupDate({ day, month: selectedMonth, year: selectedYear });
+      setPopupDate({
+        day,
+        month: monthIndex,
+        year: selectedYear,
+      });
     }
   };
 
