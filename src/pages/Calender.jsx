@@ -100,9 +100,9 @@ const Calendar = () => {
     }
   };
 
-  const closePopup = () => {
-    setPopupDate(null);
-  };
+  // const closePopup = () => {
+  //   setPopupDate(null);
+  // };
 
   const renderMonthView = () => {
     const calendarDays = generateCalendarDays();
