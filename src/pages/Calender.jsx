@@ -3,6 +3,7 @@ import GlobalDialog from "../components/GlobalDialog";
 
 const Calendar = () => {
   const [view, setView] = useState("month");
+
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [popupDate, setPopupDate] = useState(null);
@@ -81,9 +82,16 @@ const Calendar = () => {
     return days;
   };
 
-  const handleDateClick = (day) => {
+  const handleDateClick = (
+    event,
+    day,
+    monthIndex = selectedMonth,
+    year = selectedYear
+  ) => {
+    event?.stopPropagation();
+    event?.preventDefault();
     if (day) {
-      setPopupDate({ day, month: selectedMonth, year: selectedYear });
+      setPopupDate({ day, month: monthIndex, year });
     }
   };
   const closePopup = () => {
@@ -117,7 +125,7 @@ const Calendar = () => {
                     <td
                       key={colIndex}
                       className="border p-1 sm:p-4 md:p-4 text-center cursor-pointer"
-                      onClick={() => handleDateClick(day)}
+                      onClick={(event) => handleDateClick(event, day)}
                     >
                       <span
                         className={`inline-flex items-center justify-center w-8 h-8 rounded-full ${
@@ -198,7 +206,14 @@ const Calendar = () => {
                           <td
                             key={colIndex}
                             className="text-xs text-center p-1 cursor-pointer"
-                            onClick={() => handleDateClick(day)}
+                            onClick={(event) =>
+                              handleDateClick(
+                                event,
+                                day,
+                                monthIndex,
+                                selectedYear
+                              )
+                            }
                           >
                             <span
                               className={`inline-flex items-center justify-center w-6 h-6 rounded-full ${
@@ -223,7 +238,7 @@ const Calendar = () => {
       </div>
     );
   };
-  const years = Array.from({ length: 10 }, (_, i) => selectedYear - 5 + i);
+  const years = Array.from({ length: 20 }, (_, i) => selectedYear - 10 + i);
   return (
     <div className="pb-20">
       <div className="flex gap-4 mb-4">
@@ -251,10 +266,10 @@ const Calendar = () => {
           id="year"
           value={selectedYear}
           onChange={(e) => setSelectedYear(Number(e.target.value))}
-          className=" relative px-4 py-2 rounded bg-gray-300 border-gray-300 hover-gray-300 "
+          className=" relative px-4 py-2 rounded bg-gray-300 border-gray-300 hover-gray-300"
         >
           {years.map((year) => (
-            <option key={year} value={year} className="py-8 px-8 bg-gray-300">
+            <option key={year} value={year} className="py-8 px-8 bg-gray-300 ">
               {year}
             </option>
           ))}
