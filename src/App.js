@@ -10,17 +10,6 @@ function App() {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
-  // const changeView = (newView) => {
-  //   setView(newView);
-  // };
-
-  // const goToToday = () => {
-  //   const today = new Date();
-  //   setSelectedMonth(today.getMonth());
-  //   setSelectedYear(today.getFullYear());
-  //   setView("month");
-  // };
-
   return (
     <div style={{ minHeight: "100vh" }}>
       <Calendar
