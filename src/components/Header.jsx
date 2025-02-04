@@ -25,6 +25,7 @@ const Header = ({
           <i
             onClick={prevMonth}
             className="ri-arrow-left-s-line cursor-pointer text-xl text-white"
+            data-testid="prev-button"
           ></i>
           <span className="text-xl font-bold text-center w-[180px] text-white">
             {getMonthName(selectedMonth)} {selectedYear}
@@ -32,6 +33,7 @@ const Header = ({
           <i
             onClick={nextMonth}
             className="ri-arrow-right-s-line cursor-pointer text-xl text-white"
+            data-testid="next-button"
           ></i>
         </div>
 
@@ -48,6 +50,7 @@ const Header = ({
           >
             Month
           </button>
+          //{" "}
           <button
             onClick={goToToday}
             className="bg-gray-400 px-4 py-2 rounded hover:bg-gray-500 text-white h-10 flex items-center justify-center"

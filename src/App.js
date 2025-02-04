@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import "remixicon/fonts/remixicon.css";
-
-import Calendar from "./pages/Calender";
+import Calendar from "./pages/Calendar";
 import Footer from "./components/Footer";
 
 function App() {
