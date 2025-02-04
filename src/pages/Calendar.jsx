@@ -104,7 +104,10 @@ const Calendar = () => {
     const calendarDays = generateCalendarDays();
 
     return (
-      <div className="mt-8 overflow-x-hidden py-2 px-4 ">
+      <div
+        className="mt-8 overflow-x-hidden py-2 px-4 "
+        data-testId="month-view"
+      >
         <table className="table-auto w-full max-w-4xl mx-auto border-2 border-gray-500 sm:w-full md:max-w-4xl bg-gray-100">
           <thead>
             <tr>
@@ -172,7 +175,10 @@ const Calendar = () => {
     };
 
     return (
-      <div className="grid grid-cols-1 bg-gray-100 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6 py-8 px-8">
+      <div
+        className="grid grid-cols-1 bg-gray-100 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6 py-8 px-8"
+        data-testid="year-view"
+      >
         {Array.from({ length: 12 }).map((_, monthIndex) => {
           const calendarDays = getCalendarForMonth(monthIndex);
           return (
@@ -259,13 +265,18 @@ const Calendar = () => {
 
       {popupDate && (
         <GlobalDialog>
-          <div className="bg-gray-300 p-4 rounded shadow-lg text-center">
-            <p>
+          <div
+            className="bg-gray-300 p-4 rounded shadow-lg text-center"
+            data-testid="date-popup"
+          >
+            <p data-testid="selected-date">
               {popupDate.day} {getMonthName(popupDate.month)} {popupDate.year}
             </p>
             <button
               onClick={() => setPopupDate(null)}
+              data-testId="1"
               className="mt-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+              data-testid="close-popup"
             >
               Close
             </button>

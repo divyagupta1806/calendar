@@ -47,6 +47,37 @@ describe("Calendar Component", () => {
     ).toBeInTheDocument();
   });
 
+  test("changes view when a different view is selected", () => {
+    render(<Calendar />);
+
+    expect(screen.getByTestId("month-view")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(/year/i));
+
+    expect(screen.getByTestId("year-view")).toBeInTheDocument();
+  });
+
+  test("clicking a month in year view switches to month view", () => {
+    render(<Calendar />);
+
+    fireEvent.click(screen.getByText(/year/i));
+    expect(screen.getByTestId("year-view")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(/JANUARY/i));
+
+    expect(screen.getByTestId("month-view")).toBeInTheDocument();
+  });
+
+  test("clicking a date opens the popup with the correct date", () => {
+    render(<Calendar />);
+
+    const dateCell = screen.getAllByText("1")[0];
+    fireEvent.click(dateCell);
+
+    expect(screen.getByTestId("date-popup")).toBeInTheDocument();
+    expect(screen.getByTestId("selected-date")).toHaveTextContent(/1/i);
+  });
+
   test("clicking a date opens the popup", () => {
     render(<Calendar />);
 
@@ -54,6 +85,47 @@ describe("Calendar Component", () => {
     fireEvent.click(dateCell);
 
     expect(screen.getByText(/1 /)).toBeInTheDocument();
+  });
+  test("changes view when a different view is selected", () => {
+    render(<Calendar />);
+
+    expect(screen.getByTestId("month-view")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText(/year/i));
+
+    expect(screen.getByTestId("year-view")).toBeInTheDocument();
+  });
+
+  test("navigates to the previous month when clicking 'Prev'", () => {
+    render(<Calendar />);
+
+    expect(screen.getByText(/FEBRUARY 2025/i)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("prev-button"));
+
+    expect(screen.getByText(/JANUARY 2025/i)).toBeInTheDocument();
+  });
+
+  test("navigates to the next month when clicking 'Next'", () => {
+    render(<Calendar />);
+
+    expect(screen.getByText(/FEBRUARY 2025/i)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("next-button"));
+
+    expect(screen.getByText(/MARCH 2025/i)).toBeInTheDocument();
+  });
+
+  test("closes popup when close button is clicked", () => {
+    render(<Calendar />);
+
+    fireEvent.click(screen.getAllByText("1")[0]);
+
+    expect(screen.getByTestId("date-popup")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("close-popup"));
+
+    expect(screen.queryByTestId("date-popup")).not.toBeInTheDocument();
   });
 
   test("closes popup when close button is clicked", () => {
@@ -66,5 +138,27 @@ describe("Calendar Component", () => {
     fireEvent.click(closeButton);
 
     expect(screen.queryByText(/1 /)).not.toBeInTheDocument();
+  });
+  it('should go to previous month when "prevMonth" button is clicked', () => {
+    render(<Calendar />);
+
+    expect(screen.getByText(/FEBRUARY 2025/i)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("prev-button"));
+
+    expect(screen.getByText(/JANUARY 2025/i)).toBeInTheDocument();
+  });
+
+  it("should correctly change year when going back from January to December", () => {
+    render(<Calendar />);
+
+    expect(screen.getByText(/FEBRUARY 2025/i)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("prev-button"));
+
+    expect(screen.getByText(/JANUARY 2025/i)).toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId("prev-button"));
+    expect(screen.getByText(/DECEMBER 2024/i)).toBeInTheDocument();
   });
 });

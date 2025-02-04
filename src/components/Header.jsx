@@ -50,7 +50,7 @@ const Header = ({
           >
             Month
           </button>
-          //{" "}
+
           <button
             onClick={goToToday}
             className="bg-gray-400 px-4 py-2 rounded hover:bg-gray-500 text-white h-10 flex items-center justify-center"
