@@ -27,7 +27,10 @@ const Header = ({
             className="ri-arrow-left-s-line cursor-pointer text-xl text-white"
             data-testid="prev-button"
           ></i>
-          <span className="text-xl font-bold text-center w-[180px] text-white">
+          <span
+            className="text-xl font-bold text-center w-[180px] text-white"
+            data-testid="month-text"
+          >
             {getMonthName(selectedMonth)} {selectedYear}
           </span>
           <i

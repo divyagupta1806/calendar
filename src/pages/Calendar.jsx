@@ -263,6 +263,26 @@ const Calendar = () => {
       {view === "month" && renderMonthView()}
       {view === "year" && renderYearView()}
 
+      {/* {popupDate && (
+        <GlobalDialog>
+          <div
+            className="bg-gray-300 p-4 rounded shadow-lg text-center"
+            data-testid="date-popup"
+          >
+            <p data-testid="selected-date">
+              {popupDate.day} {getMonthName(popupDate.month)} {popupDate.year}
+            </p>
+            <button
+              onClick={() => setPopupDate(null)}
+              data-testId="1"
+              className="mt-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+              data-testid="close-popup"
+            >
+              Close
+            </button>
+          </div>
+        </GlobalDialog> */}
+
       {popupDate && (
         <GlobalDialog>
           <div

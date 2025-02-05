@@ -1,12 +1,12 @@
 module.exports = {
   testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-  moduleDirectories: ["node_modules", "<rootDir>/src"],
-  testMatch: [
-    "**/__tests__/**/*.test.[jt]s?(x)",
-    "**/?(*.)+(spec|test).[tj]s?(x)",
-  ],
   moduleNameMapper: {
-    "\\.css$": "identity-obj-proxy",
+    "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+    "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/__mocks__/fileMock.js",
+  },
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  testMatch: ["**/__tests__/**/*.test.js"],
+  transform: {
+    "^.+\\.(js|jsx)$": "babel-jest",
   },
 };
